@@ -57,9 +57,10 @@
     "pretest": "npm run compile && npm run compile-tests",
     "check-types": "tsc --noEmit",
     "lint": "eslint src",
-    "test": "node ./out/test/runTest.js"
+    "test": "node --loader ts-node/esm ./out/test/runTest.js"
   },
   "devDependencies": {
+    "@types/glob": "^8.1.0",
     "@types/mocha": "^10.0.10",
     "@types/node": "20.x",
     "@types/vscode": "^1.100.0",
@@ -69,11 +70,11 @@
     "@vscode/test-electron": "^2.5.2",
     "esbuild": "^0.25.3",
     "eslint": "^9.25.1",
-    "npm-run-all": "^4.1.5",
-    "typescript": "^5.8.3",
-    "@types/glob": "^8.1.0",
     "glob": "^8.1.0",
-    "mocha": "^10.2.0"
+    "mocha": "^10.2.0",
+    "npm-run-all": "^4.1.5",
+    "ts-node": "^10.9.2",
+    "typescript": "^5.8.3"
   },
   "dependencies": {
     "@vscode/webview-ui-toolkit": "^1.4.0",

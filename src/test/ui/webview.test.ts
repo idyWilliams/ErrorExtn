@@ -1,5 +1,5 @@
 import * as assert from "assert";
-import { getWebviewContent } from "../../ui/webview";
+import { getWebviewContent } from "../../ui/webview.js";
 
 suite("Webview UI Test Suite", () => {
   test("Should generate valid HTML with explanation", () => {

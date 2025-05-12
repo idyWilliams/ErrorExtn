@@ -1,13 +1,13 @@
 import * as vscode from "vscode";
-import { explainError } from "../ai/explainError";
-import { getWebviewContent } from "../ui/webview";
+import { explainError } from "../ai/explainError.js";
+import { getWebviewContent } from "../ui/webview.js";
 
 export function registerExplainErrorCommand(context: vscode.ExtensionContext) {
   const disposable = vscode.commands.registerCommand(
     "errorExplainer.explainError",
     async () => {
       const editor = vscode.window.activeTextEditor;
-      if (!editor) return;
+      if (!editor) {return;}
       const position = editor.selection.active;
       const diagnostics = vscode.languages.getDiagnostics(editor.document.uri);
       const diagnostic = diagnostics.find(
@@ -39,6 +39,7 @@ export function registerExplainErrorCommand(context: vscode.ExtensionContext) {
         );
         panel.webview.html = getWebviewContent(explanation);
       } catch (error) {
+        console.error(error);
         vscode.window.showErrorMessage("Failed to get error explanation");
       }
     }

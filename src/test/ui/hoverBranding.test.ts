@@ -1,5 +1,5 @@
 import * as assert from "assert";
-import { getHoverBranding } from "../../ui/hoverBranding";
+import { getHoverBranding } from "../../ui/hoverBranding.js";
 
 suite("Hover Branding Test Suite", () => {
   test("Should return markdown string with branding", () => {

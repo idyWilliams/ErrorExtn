@@ -1,5 +1,5 @@
 import * as assert from "assert";
-import { explainError } from "../../ai/explainError";
+import { explainError } from "../../ai/explainError.js";
 
 suite("AI Error Explanation Test Suite", () => {
   test("Should return a string explanation for a valid error", async () => {
