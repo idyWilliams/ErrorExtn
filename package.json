@@ -1,23 +1,49 @@
 {
   "name": "errorexplainer",
   "displayName": "ErrorExplainer",
-  "description": "this extention is going to be able to explain errors to developers in a common way and is also going tto be able to help then understand why they are having the error and what to do to solve it. ",
+  "description": "AI-powered error explanation extension that helps developers understand and fix errors in their code.",
   "version": "0.0.1",
+  "type": "module",
   "engines": {
     "vscode": "^1.100.0"
   },
   "categories": [
-    "Other"
+    "Other",
+    "Programming Languages"
   ],
-  "activationEvents": [],
+  "activationEvents": [
+    "onLanguage:*"
+  ],
   "main": "./dist/extension.js",
   "contributes": {
     "commands": [
       {
-        "command": "errorexplainer.helloWorld",
-        "title": "Hello World"
+        "command": "errorExplainer.explainError",
+        "title": "Explain Error",
+        "category": "ErrorExplainer"
       }
-    ]
+    ],
+    "configuration": {
+      "title": "ErrorExplainer",
+      "properties": {
+        "errorExplainer.openaiApiKey": {
+          "type": "string",
+          "default": "",
+          "description": "OpenAI API Key for error explanations",
+          "scope": "application",
+          "sensitive": true
+        },
+        "errorExplainer.modelName": {
+          "type": "string",
+          "default": "gpt-3.5-turbo",
+          "enum": [
+            "gpt-3.5-turbo",
+            "gpt-4"
+          ],
+          "description": "OpenAI model to use for error explanations"
+        }
+      }
+    }
   },
   "scripts": {
     "vscode:prepublish": "npm run package",
@@ -28,10 +54,10 @@
     "package": "npm run check-types && npm run lint && node esbuild.js --production",
     "compile-tests": "tsc -p . --outDir out",
     "watch-tests": "tsc -p . -w --outDir out",
-    "pretest": "npm run compile-tests && npm run compile && npm run lint",
+    "pretest": "npm run compile && npm run compile-tests",
     "check-types": "tsc --noEmit",
     "lint": "eslint src",
-    "test": "vscode-test"
+    "test": "node ./out/test/runTest.js"
   },
   "devDependencies": {
     "@types/mocha": "^10.0.10",
@@ -44,11 +70,14 @@
     "esbuild": "^0.25.3",
     "eslint": "^9.25.1",
     "npm-run-all": "^4.1.5",
-    "typescript": "^5.8.3"
+    "typescript": "^5.8.3",
+    "@types/glob": "^8.1.0",
+    "glob": "^8.1.0",
+    "mocha": "^10.2.0"
   },
   "dependencies": {
     "@vscode/webview-ui-toolkit": "^1.4.0",
-    "langchain": "^0.3.24",
-    "openai": "^4.98.0"
+    "langchain": "0.0.189",
+    "openai": "^4.18.0"
   }
 }
